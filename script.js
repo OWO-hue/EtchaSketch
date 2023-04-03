@@ -1,14 +1,46 @@
 const container = document.querySelector('#container')
 
 const black = document.querySelector('#black')
-black.addEventListener('click', (e) => e.target.id)
 const rainbow = document.querySelector('#rainbow')
+
+let result = 'black'
+
+let reset = document.querySelector('#reset')
+
+let resetBool = false
+reset.addEventListener('click', () => {
+    let grids = document.querySelectorAll('#grid')
+
+    for (let allgrid of grids) {
+        allgrid.style.background = null
+    }
+    console.log('is it working')
+})
+
+
+
+
+rainbow.addEventListener('click',() => {
+    result = 'rainbow'
+})
+
+black.addEventListener('click',() => {
+    result = 'black'
+})
 
 const grid = document.createElement('div')
 grid.setAttribute('id','grid')
 const hover = (e) => {
-    const color = ['red','blue','green','purple','orange','yellow','navy']
-    e.target.style.background = color[Math.floor(Math.random()*7)]
+    
+    if (result === 'black') {
+        const color = 'black'
+        e.target.style.background = color
+    }
+
+    if (result === 'rainbow') {
+        const color = ['red','blue','green','purple','orange','yellow','navy']
+        e.target.style.background = color[Math.floor(Math.random()*7)]
+    }
 }
 const mouseOut = (e) => {
     e.target.style.background = 'white'
@@ -34,4 +66,5 @@ for (let j = 0 ; j < 16; j++) {
     tempContainer.setAttribute('id','gridContainer')
     container.appendChild(tempContainer)
 }
+
 

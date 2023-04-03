@@ -34,16 +34,22 @@ black.addEventListener('click',() => {
 
 const grid = document.createElement('div')
 grid.setAttribute('id','grid')
-const hover = (e) => {
-    
-    if (result === 'black') {
+
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
+
+const mouseOver = (e) => {
+    if (result === 'black' &&  mouseDown === true) {
         const color = 'black'
         e.target.style.background = color
     }
 
-    if (result === 'rainbow') {
-        const color = ['red','blue','green','purple','orange','yellow','navy']
-        e.target.style.background = color[Math.floor(Math.random()*7)]
+    if (result === 'rainbow' &&  mouseDown === true) {
+        const temp = ['red','blue','green','purple','orange','yellow','navy']
+        const color = temp[Math.floor(Math.random()*7)]
+        e.target.style.background = color
     }
 }
 const mouseOut = (e) => {
@@ -63,7 +69,7 @@ for (let j = 0 ; j < 16; j++) {
     for (let i = 0; i < 16; i++) {
         const temp = document.createElement('div')
         temp.setAttribute('id','grid')
-        temp.addEventListener('mouseover',hover)
+        temp.addEventListener('mouseover',mouseOver)
         // temp.addEventListener('mouseout',mouseOut)
         tempContainer.appendChild(temp)
     }
@@ -83,7 +89,7 @@ const moreGrid = () => {
         for (let i = 0; i < askUserNum; i++) {
             const temp = document.createElement('div')
             temp.setAttribute('id','grid')
-            temp.addEventListener('mouseover',hover)
+            temp.addEventListener('mouseover',mouseOver)
             // temp.addEventListener('mouseout',mouseOut)
             tempContainer.appendChild(temp)
         }

@@ -3,6 +3,10 @@ const container = document.querySelector('#container')
 const black = document.querySelector('#black')
 const rainbow = document.querySelector('#rainbow')
 
+const gridNum = 0
+
+
+
 let result = 'black'
 
 let reset = document.querySelector('#reset')
@@ -66,5 +70,29 @@ for (let j = 0 ; j < 16; j++) {
     tempContainer.setAttribute('id','gridContainer')
     container.appendChild(tempContainer)
 }
+const gridButton = document.querySelector('#gridButton')
+
+const moreGrid = () => {
+    let askUserNum = prompt('hi put in a number for the amount of grids (up to 100): ')
+    while (askUserNum > 100) {
+        askUserNum = prompt('number is too high or you did not put in a Number! Try again')
+    }
+    container.innerHTML = null
+    for (let j = 0 ; j < askUserNum; j++) {
+        const tempContainer = document.createElement('div')
+        for (let i = 0; i < askUserNum; i++) {
+            const temp = document.createElement('div')
+            temp.setAttribute('id','grid')
+            temp.addEventListener('mouseover',hover)
+            // temp.addEventListener('mouseout',mouseOut)
+            tempContainer.appendChild(temp)
+        }
+        tempContainer.setAttribute('id','gridContainer')
+        container.appendChild(tempContainer)
+    }
+}
+
+gridButton.addEventListener('click',moreGrid)
+
 
 
